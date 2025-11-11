@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenuUI : MonoBehaviour
 {
 
     [SerializeField] private Button resumeButton;
@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
         {
             resumeButton.onClick.AddListener(SwitchState);
         }
+        HidePauseMenu();
     }
 
     // FixedUpdate is called at a fixed interval and is commonly used for physics updates
@@ -43,6 +44,12 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 1f; // Resume the game
         }
+    }
+
+    void HidePauseMenu()
+    {
+        pauseGame.SetActive(false);
+        Time.timeScale = 1f; // Ensure the game is running
     }
 
 }

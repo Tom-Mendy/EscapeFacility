@@ -11,7 +11,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private DetectionUI detectionUI;
     [SerializeField] private MiniMapCamera miniMapCamera;
     [SerializeField] private CameraControlUI cameraControlUI;
-    [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private PauseMenuUI pauseMenu;
 
     [Header("HUD Elements")]
     [SerializeField] private GameObject hudPanel;
@@ -64,7 +64,7 @@ public class GameUIManager : MonoBehaviour
 
         if (pauseMenu == null)
         {
-            pauseMenu = FindFirstObjectByType<PauseMenu>();
+            pauseMenu = FindFirstObjectByType<PauseMenuUI>();
         }
 
         // Setup mini-map display
