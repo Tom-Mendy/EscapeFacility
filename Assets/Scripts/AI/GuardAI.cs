@@ -65,7 +65,19 @@ public class GuardAI : MonoBehaviour
             visionCone = GetComponent<VisionCone>();
 
         if (waypoints != null && waypoints.Length > 0)
-            GoToNextWaypoint();
+        {
+            foreach (Transform wp in waypoints)
+            {
+                if (wp == null || wp.position == null)
+                {
+                    Debug.LogError("One waypoint is not correctly set");
+                    return;
+                }
+            }
+
+
+        }
+        GoToNextWaypoint();
     }
 
     void Update()

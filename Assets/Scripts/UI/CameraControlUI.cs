@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CameraControlUI : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CameraControlUI : MonoBehaviour
 
     [Header("Camera Display")]
     [SerializeField] private RawImage cameraDisplayImage;
-    [SerializeField] private Text cameraNameText;
+    [SerializeField] private TMP_Text cameraNameText;
 
     [Header("Security Cameras")]
     [SerializeField] private SecurityCamera[] securityCameras;

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class DetectionUI : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class DetectionUI : MonoBehaviour
     [Header("Caught Screen")]
     [SerializeField] private GameObject caughtPanel;
     [SerializeField] private Image caughtScreenImage;
-    [SerializeField] private Text caughtText;
+    [SerializeField] private TMP_Text caughtText;
     [SerializeField] private float caughtFlashDuration = 2f;
 
     [Header("Guard References")]
