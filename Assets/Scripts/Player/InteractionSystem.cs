@@ -5,6 +5,7 @@ public class Interactions : MonoBehaviour
 {
     public TMP_Text interactionText;
     private Door currentDoor;
+    private Lever currentLever;
 
     void OnTriggerEnter(Collider other)
     {
@@ -12,6 +13,12 @@ public class Interactions : MonoBehaviour
         {
             currentDoor = other.GetComponentInParent<Door>();
             interactionText.text = currentDoor.GetInteractionText();
+            interactionText.gameObject.SetActive(true);
+        }
+        if (other.gameObject.GetComponentInParent<Lever>() != null)
+        {
+            currentLever = other.GetComponentInParent<Lever>();
+            interactionText.text = currentLever.GetInteractionText();
             interactionText.gameObject.SetActive(true);
         }
     }
@@ -23,14 +30,28 @@ public class Interactions : MonoBehaviour
             currentDoor = null;
             interactionText.gameObject.SetActive(false);
         }
+        if (other.gameObject.GetComponentInParent<Lever>() != null)
+        {
+            currentLever = null;
+            interactionText.gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if (currentDoor != null && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            currentDoor.Interact();
-            interactionText.text = currentDoor.GetInteractionText();
+            if (currentDoor != null)
+            {
+                currentDoor.Interact();
+                interactionText.text = currentDoor.GetInteractionText();
+            }
+
+            if (currentLever != null)
+            {
+                currentLever.Interact();
+                interactionText.text = currentLever.GetInteractionText();
+            }
         }
     }
 }
