@@ -793,7 +793,7 @@ MonoBehaviour:
   screenFadeOverlay: {fileID: 91817839}
   vignetteOverlay: {fileID: 926655845}
   scanlineOverlay: {fileID: 0}
-  progressBar: {fileID: 1245340988}
+  progressBar: {fileID: 0}
   beepAudioClip: {fileID: 8300000, guid: db312c24a41c1274fa52f2f25a2f4c95, type: 3}
   keyStrokeAudioClip: {fileID: 8300000, guid: 15f2a47d2d3815041b6e6815fb433763, type: 3}
   ambientDroneClip: {fileID: 0}
