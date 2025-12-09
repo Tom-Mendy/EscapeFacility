@@ -22,21 +22,18 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private RawImage miniMapDisplay;
     [SerializeField] private Camera miniMapCameraComponent;
 
-    private static GameUIManager instance;
-    public static GameUIManager Instance => instance;
+    public static GameUIManager Instance;
 
     void Awake()
     {
-        // Singleton pattern
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
