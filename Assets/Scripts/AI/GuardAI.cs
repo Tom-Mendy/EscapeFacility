@@ -40,6 +40,9 @@ public class GuardAI : MonoBehaviour
     public float hearingRadiusMultiplier = 1f; // used with noise radius to set priority
 
     private NavMeshAgent agent;
+    public Animator _animator;
+    private int _animIDSpeed;
+    private int _animIDState;
 
     [HideInInspector] public GuardState currentState = GuardState.Patrol;
     private Vector3 lastKnownPosition; // last seen or heard pos
@@ -73,6 +76,8 @@ public class GuardAI : MonoBehaviour
                     Debug.LogError("One waypoint is not correctly set");
                     return;
                 }
+               
+
             }
 
 
@@ -120,6 +125,12 @@ public class GuardAI : MonoBehaviour
         if (health < fleeHealthThreshold && currentState != GuardState.Flee)
         {
             currentState = GuardState.Flee;
+        }
+        // update animator parameters
+        if (_animator != null && agent != null)
+        {
+            _animator.SetFloat("Speed", agent.velocity.magnitude);
+            _animator.SetFloat("MotionSpeed", 1);
         }
     }
 
