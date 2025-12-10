@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnPlayButtonClick()
     {
-        SceneManager.LoadScene("Game");
-        Debug.Log("Switch scene to Game one");
+        SceneManager.LoadScene("Level2");
+        Debug.Log("Switch scene to Level2 one");
     }
 }

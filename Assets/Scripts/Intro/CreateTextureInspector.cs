@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -24,8 +25,9 @@ public class CreateTextureInspector : Editor
                 EditorGUILayout.HelpBox("This GameObject needs a Renderer or SpriteRenderer component to generate a texture.", MessageType.Error);
                 return;
             }
-            
+
             myTarget.GenerateTexture((int)myTarget.textureSize, myTarget.filterMode, myTarget.wrapMode);
         }
     }
 }
+#endif

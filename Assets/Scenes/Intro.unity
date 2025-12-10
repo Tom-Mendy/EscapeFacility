@@ -798,8 +798,8 @@ MonoBehaviour:
   keyStrokeAudioClip: {fileID: 8300000, guid: 15f2a47d2d3815041b6e6815fb433763, type: 3}
   ambientDroneClip: {fileID: 0}
   glitchSoundClip: {fileID: 0}
-  beepVolume: 1
-  keyStrokeVolume: 0.6
+  beepVolume: 0.8
+  keyStrokeVolume: 0.2
   ambientVolume: 0.3
   glitchVolume: 0.5
   nextScene: MainMenu
