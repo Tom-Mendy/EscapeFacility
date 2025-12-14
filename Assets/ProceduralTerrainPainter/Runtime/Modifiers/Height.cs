@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 namespace sc.terrain.proceduralpainter
 {
@@ -21,7 +19,7 @@ namespace sc.terrain.proceduralpainter
         public override void Configure(Material material)
         {
             base.Configure(material);
-            
+
             material.SetVector("_MinMaxHeight", new Vector4(min, max, minFalloff, maxFalloff));
         }
     }

@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 
 public class DetectionUI : MonoBehaviour
@@ -20,7 +20,7 @@ public class DetectionUI : MonoBehaviour
     [SerializeField] private float caughtFlashDuration = 2f;
 
     [Header("Guard References")]
-    [SerializeField] private Transform[] guards;
+    private Transform[] guards;
 
     private float currentDetectionLevel = 0f;
     private bool isDetected = false;

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -103,9 +102,9 @@ public class IntroSequence : MonoBehaviour
             transitionText.alpha = 0;
             transitionText.text = "";
         }
-        
+
         audioSource = GetComponent<AudioSource>();
-        
+
         // Setup camera reference for shake effect
         mainCamera = Camera.main;
         if (mainCamera != null)
@@ -137,7 +136,7 @@ public class IntroSequence : MonoBehaviour
         {
             vignetteOverlay.canvasRenderer.SetAlpha(enableVignetteEffect ? vignetteIntensity : 0f);
         }
-        
+
         // Initialize screen fade overlay to black if screen fade is enabled
         if (enableScreenFade && screenFadeOverlay != null)
         {
@@ -153,7 +152,7 @@ public class IntroSequence : MonoBehaviour
         if (allowSkip && !isSkipped)
         {
             bool skipPressed = Input.GetKeyDown(skipKey);
-            
+
             if (skipOnAnyKey && Input.anyKeyDown && !skipPressed)
                 skipPressed = true;
 
@@ -177,7 +176,7 @@ public class IntroSequence : MonoBehaviour
         if (isSkipped) return;
 
         isSkipped = true;
-        
+
         // Stop current sequence
         if (sequenceCoroutine != null)
             StopCoroutine(sequenceCoroutine);
@@ -273,7 +272,7 @@ public class IntroSequence : MonoBehaviour
         }
 
         studioLogo.CrossFadeAlpha(1f, studioLogoFadeInDuration, false);
-        
+
         // Add chromatic aberration effect during fade in
         if (enableChromaticAberration)
         {
@@ -294,7 +293,7 @@ public class IntroSequence : MonoBehaviour
         }
 
         // Select message
-        string msg = enableRandomMessage 
+        string msg = enableRandomMessage
             ? messages[UnityEngine.Random.Range(0, messages.Length)]
             : messages[Mathf.Clamp(specificMessageIndex, 0, messages.Length - 1)];
 
@@ -337,7 +336,7 @@ public class IntroSequence : MonoBehaviour
         }
 
         gameLogo.CrossFadeAlpha(1f, gameLogoFadeInDuration, false);
-        
+
         // Play beep sound for logo appearance
         if (audioSource != null && beepAudioClip != null)
         {
@@ -349,7 +348,7 @@ public class IntroSequence : MonoBehaviour
         {
             StartCoroutine(ChromaticAberrationPulse(gameLogo.rectTransform, gameLogoFadeInDuration * 0.5f));
         }
-        
+
         yield return null;
     }
 
@@ -396,7 +395,7 @@ public class IntroSequence : MonoBehaviour
             if (isSkipped) break;
 
             transitionText.rectTransform.localPosition = originalPosition +
-                new Vector3(UnityEngine.Random.Range(-glitchIntensity, glitchIntensity), 
+                new Vector3(UnityEngine.Random.Range(-glitchIntensity, glitchIntensity),
                            UnityEngine.Random.Range(-glitchIntensity, glitchIntensity), 0);
 
             transitionText.alpha = UnityEngine.Random.value > 0.5f ? 1f : 0.3f;
@@ -523,7 +522,7 @@ public class IntroSequence : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
-            
+
             if (progressBar != null)
                 progressBar.value = progress;
 
@@ -532,7 +531,7 @@ public class IntroSequence : MonoBehaviour
             {
                 // Wait a moment for effect
                 yield return new WaitForSeconds(0.5f);
-                
+
                 OnSequenceComplete?.Invoke();
                 asyncLoad.allowSceneActivation = true;
             }

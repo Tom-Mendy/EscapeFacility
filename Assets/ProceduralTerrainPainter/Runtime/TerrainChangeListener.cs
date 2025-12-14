@@ -22,7 +22,7 @@ namespace sc.terrain.proceduralpainter
 
             if ((flags & TerrainChangedFlags.Heightmap) != 0)
             {
-                if(TerrainPainter.Current.autoRepaint && TerrainPainter.Current.terrains.Contains(terrain)) TerrainPainter.Current.RepaintTerrain(terrain);
+                if (TerrainPainter.Current.autoRepaint && TerrainPainter.Current.terrains.Contains(terrain)) TerrainPainter.Current.RepaintTerrain(terrain);
             }
         }
     }
