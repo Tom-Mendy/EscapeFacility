@@ -6,6 +6,7 @@ public class autoDisableTravellingCamera : MonoBehaviour
     void Start() {
         playerCamera.SetActive(false);
     }
+
     void disableCamera()
     {
         playerCamera.SetActive(true);
