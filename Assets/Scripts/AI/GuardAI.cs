@@ -318,4 +318,18 @@ public class GuardAI : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth ph = player.GetComponent<PlayerHealth>();
+            if (ph != null)
+            {
+                ph.LoseLife();
+            }
+        }
+    }
+
 }

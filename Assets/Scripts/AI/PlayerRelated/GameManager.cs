@@ -20,4 +20,12 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public void ResetGame()
+    {
+        score = 0;
+        Map1Time = 0;
+        Map2Time = 0;
+        life = 3;
+    }
 }
