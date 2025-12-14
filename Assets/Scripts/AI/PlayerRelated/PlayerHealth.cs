@@ -3,15 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Invincibility")]
-    public float invincibilityTime = 1.5f;
-
-    private bool isInvincible = false;
 
     public void LoseLife()
     {
-        if (isInvincible)
-            return;
 
         if (GameManager.Instance == null)
         {
@@ -28,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            StartCoroutine(InvincibilityCoroutine());
+            SceneManager.LoadScene("Level2");
         }
     }
 
@@ -36,12 +30,5 @@ public class PlayerHealth : MonoBehaviour
     {
         GameManager.Instance.ResetGame();
         SceneManager.LoadScene("MainMenu");
-    }
-
-    System.Collections.IEnumerator InvincibilityCoroutine()
-    {
-        isInvincible = true;
-        yield return new WaitForSeconds(invincibilityTime);
-        isInvincible = false;
     }
 }
