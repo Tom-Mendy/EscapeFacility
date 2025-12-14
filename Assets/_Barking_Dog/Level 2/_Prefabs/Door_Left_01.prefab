@@ -119,6 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 421664}
   - component: {fileID: 8249556}
+  - component: {fileID: 1486613049294139558}
   m_Layer: 0
   m_Name: Door_Left_01
   m_TagString: Untagged
@@ -239,3 +240,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1486613049294139558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478558f9abb6c1a4fa81e733224e3cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 0}
+  requiredKey: 0
