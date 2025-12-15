@@ -1,7 +1,6 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [CanEditMultipleObjects, CustomEditor(typeof(CreateTexture))]
 public class CreateTextureInspector : Editor

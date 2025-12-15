@@ -3,7 +3,8 @@ using UnityEngine;
 public class autoDisableTravellingCamera : MonoBehaviour
 {
     public GameObject playerCamera;
-    void Start() {
+    void Start()
+    {
         playerCamera.SetActive(false);
     }
 

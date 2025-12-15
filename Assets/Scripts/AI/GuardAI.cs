@@ -76,7 +76,7 @@ public class GuardAI : MonoBehaviour
                     Debug.LogError("One waypoint is not correctly set");
                     return;
                 }
-               
+
 
             }
 

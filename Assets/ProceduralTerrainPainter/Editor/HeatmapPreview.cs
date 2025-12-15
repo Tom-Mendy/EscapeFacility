@@ -18,7 +18,7 @@ namespace sc.terrain.proceduralpainter
 #else
         private const float kNormalizedHeightScale = 0.4999771f;
 #endif
-        
+
         public static void CreateHeatmaps(Terrain[] terrains, int layerIndex, ref RenderTexture[] heatmaps)
         {
             heatmaps = new RenderTexture[terrains.Length];
@@ -37,33 +37,33 @@ namespace sc.terrain.proceduralpainter
             var channelIndex = Utilities.GetChannelIndex(layerIndex);
 
             Texture2D splatmap = terrain.terrainData.GetAlphamapTexture(splatIndex);
-            
+
             if (utilsShader == null) utilsShader = Shader.Find("Hidden/TerrainEngine/TerrainLayerUtils");
             if (utilsMat == null) utilsMat = new Material(utilsShader);
-            
+
             utilsMat.SetTexture("_MainTex", splatmap);
             utilsMat.SetVector("_LayerMask", Utilities.GetVectorMask(channelIndex));
-            
+
             //Pass 0 = Select one channel and copy it into R channel
             Graphics.Blit(splatmap, rt, utilsMat, 0);
 
             return rt;
         }
-        
+
         private static Material heatmapMat;
-        
+
         public static void Draw(Terrain terrain, TerrainLayer layer, Texture alphaMap, bool contour, bool tilingPreview)
         {
             if (!terrain || !layer) return;
-            
+
             if (!heatmapMat) heatmapMat = new Material(Shader.Find("Hidden/TerrainPainter/Heatmap"));
-            
+
             Texture heightmapTexture = terrain.terrainData.heightmapTexture;
 
             RectInt pixelRect = new RectInt(0, 0, heightmapTexture.width, heightmapTexture.height);
             Vector2 pixelSize = new Vector2(terrain.terrainData.size.x / heightmapTexture.width, terrain.terrainData.size.z / heightmapTexture.height);
             BrushTransform brushXform = TerrainPaintUtility.CalculateBrushTransform(terrain, new Vector2(0.5f, 0.5f), terrain.terrainData.size.x, 0.0f);
-            
+
             // we want to build a quad mesh, with one vertex for each pixel in the heightmap
             // i.e. a 3x3 heightmap would create a mesh that looks like this:
             //
@@ -73,8 +73,8 @@ namespace sc.terrain.proceduralpainter
             //    |\|\|
             //    +-+-+
             //
-            int quadsX = pixelRect.width+1;
-            int quadsY = pixelRect.height+1;
+            int quadsX = pixelRect.width + 1;
+            int quadsY = pixelRect.height + 1;
             int vertexCount = quadsX * quadsY * (2 * 3);  // two triangles (2 * 3 vertices) per quad
 
             // issue: the 'int vertexID' in the shader is often stored in an fp32
@@ -97,10 +97,10 @@ namespace sc.terrain.proceduralpainter
             // paint context pixels to heightmap uv:   uv = (pixels + 0.5) / width
             float invWidth = 1.0f / heightmapTexture.width;
             float invHeight = 1.0f / heightmapTexture.height;
-            heatmapMat.SetVector("_HeightmapUV_PCPixelsX",  new Vector4(invWidth, 0.0f, 0.0f, 0.0f));
-            heatmapMat.SetVector("_HeightmapUV_PCPixelsY",  new Vector4(0.0f, invHeight, 0.0f, 0.0f));
-            heatmapMat.SetVector("_HeightmapUV_Offset",     new Vector4(0.5f * invWidth, 0.5f * invHeight, 0.0f, 0.0f));
-            
+            heatmapMat.SetVector("_HeightmapUV_PCPixelsX", new Vector4(invWidth, 0.0f, 0.0f, 0.0f));
+            heatmapMat.SetVector("_HeightmapUV_PCPixelsY", new Vector4(0.0f, invHeight, 0.0f, 0.0f));
+            heatmapMat.SetVector("_HeightmapUV_Offset", new Vector4(0.5f * invWidth, 0.5f * invHeight, 0.0f, 0.0f));
+
             heatmapMat.SetTexture("_Heightmap", heightmapTexture);
             heatmapMat.SetTexture("_NormalMap", terrain.normalmapTexture);
 
@@ -115,7 +115,7 @@ namespace sc.terrain.proceduralpainter
             heatmapMat.SetVector("_ObjectPos_HeightMapSample", new Vector4(0.0f, scaleY, 0.0f, 0.0f));
             heatmapMat.SetVector("_ObjectPos_PCPixelsY", new Vector4(0.0f, 0.0f, scaleZ, 0.0f));
             //Note slightly offset, so raise up so it doesn't clip through terrain
-            heatmapMat.SetVector("_ObjectPos_Offset", new Vector4((pixelRect.xMin * scaleX), 3f , (pixelRect.yMin * scaleZ) + (pixelSize.y * 0.0f) , 1.0f));
+            heatmapMat.SetVector("_ObjectPos_Offset", new Vector4((pixelRect.xMin * scaleX), 3f, (pixelRect.yMin * scaleZ) + (pixelSize.y * 0.0f), 1.0f));
 
             // paint context origin in terrain space
             // (note this is the UV space origin and size, not the mesh origin & size)
@@ -127,16 +127,16 @@ namespace sc.terrain.proceduralpainter
             Vector2 scaleU = pcSizeX * brushXform.targetX;
             Vector2 scaleV = pcSizeZ * brushXform.targetY;
             Vector2 offset = brushXform.targetOrigin + pcOriginX * brushXform.targetX + pcOriginZ * brushXform.targetY;
-            heatmapMat.SetVector("_BrushUV_PCPixelsX",      new Vector4(scaleU.x, scaleU.y, 0.0f, 0.0f));
-            heatmapMat.SetVector("_BrushUV_PCPixelsY",      new Vector4(scaleV.x, scaleV.y, 0.0f, 0.0f));
-            heatmapMat.SetVector("_BrushUV_Offset",         new Vector4(offset.x, offset.y, 0.0f, 1.0f));
+            heatmapMat.SetVector("_BrushUV_PCPixelsX", new Vector4(scaleU.x, scaleU.y, 0.0f, 0.0f));
+            heatmapMat.SetVector("_BrushUV_PCPixelsY", new Vector4(scaleV.x, scaleV.y, 0.0f, 0.0f));
+            heatmapMat.SetVector("_BrushUV_Offset", new Vector4(offset.x, offset.y, 0.0f, 1.0f));
             heatmapMat.SetTexture("_LayerMaskTex", alphaMap);
-            
+
             heatmapMat.SetFloat("_ContourOn", contour ? 1 : 0);
             heatmapMat.SetFloat("_TilingOn", tilingPreview ? 1 : 0);
             //Tiling in world-space
-            heatmapMat.SetVector("_LayerTiling", new Vector4(layer.diffuseTexture.width / terrain.terrainData.size.x / layer.tileSize.x, layer.diffuseTexture.height / terrain.terrainData.size.z / layer.tileSize.y,  0, 0));
-            
+            heatmapMat.SetVector("_LayerTiling", new Vector4(layer.diffuseTexture.width / terrain.terrainData.size.x / layer.tileSize.x, layer.diffuseTexture.height / terrain.terrainData.size.z / layer.tileSize.y, 0, 0));
+
             heatmapMat.SetVector("_TerrainObjectToWorldOffset", terrain.GetPosition());
 
             heatmapMat.SetPass(0);

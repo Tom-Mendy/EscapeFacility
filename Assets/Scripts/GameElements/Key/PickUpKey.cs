@@ -14,7 +14,7 @@ public class PickUpKey : MonoBehaviour
             Instance = this;
             key.SetActive(true);
             // the keyNumber retrieve the value from the inspector
-            
+
         }
     }
 

@@ -14,19 +14,19 @@ namespace sc.terrain.proceduralpainter
         {
             private static GUIContent[] reslist =
             {
-                new GUIContent("16x16"), 
-                new GUIContent("32x32"), 
-                new GUIContent("64x64"), 
-                new GUIContent("128x128"), 
-                new GUIContent("256x256"), 
-                new GUIContent("512x512"), 
-                new GUIContent("1024x1024"), 
-                new GUIContent("2048x2048"), 
+                new GUIContent("16x16"),
+                new GUIContent("32x32"),
+                new GUIContent("64x64"),
+                new GUIContent("128x128"),
+                new GUIContent("256x256"),
+                new GUIContent("512x512"),
+                new GUIContent("1024x1024"),
+                new GUIContent("2048x2048"),
                 new GUIContent("4096x4096")
             };
 
             private GUIContent[] options;
-            
+
             private static int resolution = 0;
 
             private void CreateOptions(int minRes, int maxRes)
@@ -58,14 +58,14 @@ namespace sc.terrain.proceduralpainter
             private int IndexToRes(int index)
             {
                 string resString = options[index].text;
-                
+
                 return int.Parse(resString.Substring(0, resString.IndexOf("x")));
             }
-            
+
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
                 int index = 0;
-                
+
                 Attributes.ResolutionDropdown range = attribute as Attributes.ResolutionDropdown;
 
                 CreateOptions(range.min, range.max);
@@ -91,16 +91,16 @@ namespace sc.terrain.proceduralpainter
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
                 EditorGUI.BeginProperty(position, label, property);
-                
+
                 // Draw label
                 position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
                 Rect rect = position;
                 rect.width = 150f;
                 rect.x = position.width - 75f;
-                
-                property.intValue = GUI.Toolbar(rect, property.intValue , new GUIContent[] { new GUIContent("R"), new GUIContent("G"), new GUIContent("B"), new GUIContent("A") });
-                
+
+                property.intValue = GUI.Toolbar(rect, property.intValue, new GUIContent[] { new GUIContent("R"), new GUIContent("G"), new GUIContent("B"), new GUIContent("A") });
+
                 EditorGUI.EndProperty();
             }
         }
@@ -111,17 +111,17 @@ namespace sc.terrain.proceduralpainter
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
                 if (property.propertyType != SerializedPropertyType.Vector2) return;
-                
+
                 Attributes.MinMaxSlider range = attribute as Attributes.MinMaxSlider;
 
                 position.y += EditorGUIUtility.singleLineHeight;
                 EditorGUI.BeginProperty(position, label, property);
-                
+
                 // Draw label
                 //position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-                
+
                 var sliderRect = new Rect(position.x, position.y, 200, position.height);
-                
+
                 float minVal = property.vector2Value.x;
                 float maxVal = property.vector2Value.y;
 

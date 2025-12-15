@@ -12,12 +12,12 @@ namespace sc.terrain.proceduralpainter
         [Tooltip("Spans the texture across all terrains")]
         public bool spanTerrains;
         public float tiling = 1f;
-        
+
         public void OnEnable()
         {
             passIndex = FilterPass.TextureMask;
         }
-        
+
         public override void Configure(Material material)
         {
             base.Configure(material);

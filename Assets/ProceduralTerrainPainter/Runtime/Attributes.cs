@@ -8,14 +8,14 @@ namespace sc.terrain.proceduralpainter
         {
             public int min;
             public int max;
-            
+
             public ResolutionDropdown(int min, int max)
             {
                 this.min = min;
                 this.max = max;
             }
         }
-        
+
         public class MinMaxSlider : PropertyAttribute
         {
             public float min;
@@ -28,7 +28,7 @@ namespace sc.terrain.proceduralpainter
             }
 
         }
-        
+
         public class ChannelPicker : PropertyAttribute
         {
 

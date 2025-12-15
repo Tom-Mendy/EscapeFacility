@@ -3,7 +3,7 @@ using UnityEngine;
 public class MiniMapCamera : MonoBehaviour
 {
     [Header("Follow Settings")]
-    [SerializeField] private Transform player;
+    private Transform player;
     [SerializeField] private float height = 20f;
     [SerializeField] private bool followPlayer = true;
 

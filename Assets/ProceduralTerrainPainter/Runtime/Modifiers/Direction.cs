@@ -8,15 +8,15 @@ namespace sc.terrain.proceduralpainter
     {
         [Range(0f, 90f)]
         public float xAngle = 45f;
-        
+
         [Range(0f, 360f)]
         public float yAngle = 0f;
 
         public bool addSunDirection;
-        
+
         [Attributes.MinMaxSlider(0f, 1f)]
         [Min(0f)] public Vector2 levels = new Vector2(0f, 1f);
-        
+
         public void OnEnable()
         {
             passIndex = FilterPass.Direction;
@@ -28,7 +28,7 @@ namespace sc.terrain.proceduralpainter
         public override void Configure(Material material)
         {
             base.Configure(material);
-            
+
             material.SetVector(_Direction, Quaternion.Euler(xAngle + (addSunDirection ? RenderSettings.sun.transform.eulerAngles.x : 0), yAngle + (addSunDirection ? RenderSettings.sun.transform.eulerAngles.y : 0), 0f) * Vector3.forward);
             material.SetVector(_DirectionLevels, new Vector2(levels.x, levels.y));
         }
